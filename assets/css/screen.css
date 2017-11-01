@@ -791,18 +791,12 @@ Usage (In Ghost editor):
     margin-bottom: 0;
 }
 
-.post-full-content code {
-    padding: 0 5px 2px;
-    font-size: 0.8em;
-    line-height: 1em;
-    font-weight: 400!important;
-    background: var(--whitegrey);
-    border-radius: 3px;
-}
+
 
 .post-full-content pre {
+    position: relative;
     max-width: 100%;
-    overflow-x: auto;
+    overflow: hidden;
     margin: 1.5em 0 3em;
     padding: 30px 12px 12px 12px;
     color: var(--whitegrey);
@@ -818,6 +812,7 @@ Usage (In Ghost editor):
     left: 0;
     padding: 1px 12px;
     font-size: 14px;
+    font-family: sans-serif;
     font-weight: bold;
     color: #909090;
     background: #444;
@@ -828,6 +823,19 @@ Usage (In Ghost editor):
     font-size: inherit;
     line-height: inherit;
     background: transparent;
+}
+.post-full-content pre ul {
+    min-width: 0;
+}
+
+.post-full-content code {
+    padding: 0 5px 2px;
+    font-size: 0.8em;
+    line-height: 1em;
+    font-weight: 400!important;
+    background: var(--whitegrey);
+    border-radius: 3px;
+    margin-left: 12px;
 }
 
 .post-full-content code::-webkit-scrollbar{
@@ -842,6 +850,26 @@ Usage (In Ghost editor):
     -webkit-border-radius: 2em;
     -moz-border-radius: 2em;
     border-radius:2em;
+}
+
+.post-full-content pre .number {
+    position: absolute;
+    top: 20px;
+    left: 4px;
+    width: 20px;
+    padding: 12px 2px 12px 0;
+    background-color: #1e1e1e;
+    text-align: right;
+    font-size: 0.8em;
+    font-family: sans-serif;
+    color: #555;
+    line-height: 1.5em;
+}
+
+.post-full-content pre .number li{
+    margin:.25em 0;
+    line-height: 1.5em;
+    text-align:left;
 }
 
 .post-full-content .fluid-width-video-wrapper {
