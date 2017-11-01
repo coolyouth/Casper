@@ -1,24 +1,24 @@
-pre.bash::after {
+.post-full-content pre.bash::after {
     content: 'BASH';
 }
-pre.javascript::after {
+.post-full-content pre.javascript::after {
     content: 'JAVASCRIPT';
 }
-pre.cpp::after {
+.post-full-content pre.cpp::after {
     content: 'C++';
 }
-pre.c::after {
+.post-full-content pre.c::after {
     content: 'C';
 }
-pre.ini::after {
+.post-full-content pre.ini::after {
     content: 'INI';
 }
-pre.csharp::after {
+.post-full-content pre.csharp::after {
     content: 'C#';
 }
-pre.verilog::after {
+.post-full-content pre.verilog::after {
     content: 'VERILOG';
 }
-pre.vhdl::after {
+.post-full-content pre.vhdl::after {
     content: 'VHDL';
 }
