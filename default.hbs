@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     {{!-- Styles'n'Scripts --}}
-    <link rel="stylesheet" type="text/css" href="{{asset "/built/css/screen.min.css"}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset "/built/css/style.min.css"}}" />
 
     {{!-- This tag outputs SEO meta+structured data and other important settings --}}
     {{ghost_head}}
@@ -56,13 +56,13 @@
     <script src="{{asset "/built/js/zepto.min.js"}}"></script>
     
     {{#if post}}
-    <script type="text/javascript" src="{{asset "/bulit/js/post.built.js"}}"></script>
+    <script type="text/javascript" src="{{asset "/built/js/post.built.js"}}"></script>
     {{/if}}
     {{#if pagination.pages}}
     <script>
         var maxPages = parseInt('{{pagination.pages}}');
     </script>
-    <script src="{{asset "/bulit/js/index.built.js"}}"></script>
+    <script src="{{asset "/built/js/index.built.js"}}"></script>
     {{/if}}
 
     {{!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. --}}
