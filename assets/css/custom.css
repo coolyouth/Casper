@@ -1,0 +1,24 @@
+pre.bash::after {
+    content: 'BASH';
+}
+pre.javascript::after {
+    content: 'JAVASCRIPT';
+}
+pre.cpp::after {
+    content: 'C++';
+}
+pre.c::after {
+    content: 'C';
+}
+pre.ini::after {
+    content: 'INI';
+}
+pre.csharp::after {
+    content: 'C#';
+}
+pre.verilog::after {
+    content: 'VERILOG';
+}
+pre.vhdl::after {
+    content: 'VHDL';
+}
