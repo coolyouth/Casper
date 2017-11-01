@@ -1,0 +1,12 @@
+code.hljs::after{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 2px 7px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #909090;
+    background: #e9e9e9;
+    content: 'CODE';
+}

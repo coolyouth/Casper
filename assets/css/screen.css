@@ -611,7 +611,6 @@ The first (most recent) post in the list is styled to be bigger than the others 
     min-height: 230px;
     margin: 0 auto;
     padding: 70px 100px 0;
-    font-family: Georgia, serif;
     font-size: 1.8rem;
     line-height: 1.8em;
     background: #fff;
@@ -782,10 +781,10 @@ Usage (In Ghost editor):
 .post-full-content blockquote p {
     margin: 0 0 1em 0;
     color: inherit;
-    font-size: normal;
+    font-size: inherit;
     font-weight: normal;
     line-height: inherit;
-    font-style: italic;
+    font-style: normal;
 }
 
 .post-full-content blockquote p:last-child {
@@ -805,15 +804,25 @@ Usage (In Ghost editor):
     max-width: 100%;
     overflow-x: auto;
     margin: 1.5em 0 3em;
-    padding: 20px;
-    border: color(var(--darkgrey) l(-10%)) 1px solid;
+    padding: 30px 12px 12px 12px;
     color: var(--whitegrey);
     font-size: 1.4rem;
     line-height: 1.5em;
     background: #1e1e1e;
-    border-radius: 5px;
+    border-radius: 8px;
 }
-
+.post-full-content pre::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 1px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #909090;
+    background: #444;
+    content: 'CODE';
+}
 .post-full-content pre code {
     padding: 0;
     font-size: inherit;
