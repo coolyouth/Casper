@@ -7,6 +7,18 @@ $(document).ready(function() {
       hljs.highlightBlock(block);
     });
   });
+  $(function(){
+    $('pre code').each(function(){
+        var lines = $(this).text().split('\n').length - 1;
+        var $numbering = $('<ul/>').addClass('number');
+        $(this)
+            .parent()
+            .append($numbering);
+        for(i=1;i<=lines;i++){
+            $numbering.append($('<li/>').text(i));
+        }
+    });
+});
   $('.post-full-content').each(function(i,block){
       if(block.innerHTML.match(/\$\S+\$/)){
         var mathjax = document.createElement("script");
