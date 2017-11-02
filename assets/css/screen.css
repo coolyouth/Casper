@@ -612,7 +612,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
     margin: 0 auto;
     padding: 70px 100px 0;
     font-size: 1.8rem;
-    line-height: 1.8em;
+    line-height: 2.4rem;
     background: #fff;
 }
 
@@ -623,7 +623,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
 }
 @media (max-width: 800px) {
     .post-full-content {
-        font-size: 1.9rem;
+        font-size: 1.6rem;
     }
 }
 
@@ -776,12 +776,14 @@ Usage (In Ghost editor):
     margin: .5em 0 .5em;
     padding: 0 1.5em;
     border-left: #3eb0ef 3px solid;
+    background: #f6f6f6;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.125);
 }
 
 .post-full-content blockquote p {
     margin: 0 0 1em 0;
     color: inherit;
-    font-size: inherit;
+    font-size: 0.9em;
     font-weight: normal;
     line-height: inherit;
     font-style: normal;
@@ -798,13 +800,14 @@ Usage (In Ghost editor):
     margin: 1.5em 0 3em;
     padding: 30px 12px 12px 12px;
     color: var(--whitegrey);
-    font-size: 1.4rem;
+    font-size: 0.9em;
     font-family: Consolas, Monaco, Menlo, Consolas, monospace;
     line-height: 1.5em;
     background: #2d2d2d;
-    border-radius: 8px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.125);
 }
-.post-full-content pre::after {
+.post-full-content pre:after {
     position: absolute;
     top: 0;
     right: 0;
@@ -852,14 +855,14 @@ Usage (In Ghost editor):
 }
 .post-full-content code::-webkit-scrollbar-thumb {
     background-color:#555;
-    -webkit-border-radius: 2em;
-    -moz-border-radius: 2em;
-    border-radius:2em;
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    border-radius:1em;
 }
 
 .post-full-content pre .number {
     position: absolute;
-    top: 17px;
+    top: 18px;
     left: 3px;
     width: 20px;
     padding: 12px 2px 12px 0;
