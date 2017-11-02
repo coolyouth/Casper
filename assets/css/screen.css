@@ -698,7 +698,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
 
 .post-template .kg-card-markdown > p:first-child {
     font-size: 1.25em;
-    line-height: 1.5em;
+    line-height: 1.6em;
 }
 
 .post-full-content a {
@@ -911,7 +911,7 @@ Usage (In Ghost editor):
 }
 
 .post-full-content h1 {
-    margin: 0.5em 0 0.5em 0;
+    margin: 2em 0 1em 0;
     font-size: 2em;
     font-weight: 700;
 }
