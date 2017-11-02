@@ -1475,7 +1475,6 @@ Usage (In Ghost editor):
 }
 
 .floating-header-title {
-    flex: 1;
     overflow: hidden;
     margin: 0;
     color: #2e2e2e;
