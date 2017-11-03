@@ -22,3 +22,96 @@
 .post-full-content pre.vhdl::after {
     content: 'VHDL';
 }
+
+.floating-header-toc {
+    overflow: hidden;
+    margin: 0;
+    color: #2e2e2e;
+    max-width:300px;
+    min-width:180px;
+    padding:10px;
+    font-size: 1.6rem;
+    line-height: 1.3em;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align:right;
+    cursor:pointer;
+    z-index:2;
+}
+.floating-header-toc div.box {
+    padding:0 10px;
+    border: 3px solid rgba(0,0,0,0);
+    border-radius: 6px;
+    background:#fff;
+}
+.floating-header-toc div.box:hover {
+    border: 3px solid #f4f8fb;
+}
+.floating-header-toc div.box:active, .floating-header-toc div.box.hold{
+    background:#f4f8fb;
+}
+.floating-header-toc span#open, .floating-header-toc span#close{
+	display:none;
+}
+.floating-header-toc span#open.active, .floating-header-toc span#close.active {
+	display:inline;    
+}
+
+.toc {
+    visibility: hidden;
+    position: absolute;
+    top:40px;
+    right:10px;
+    background:#fff;
+    font-size:0.8em;
+    max-width:160px;
+    box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);
+    border-radius: 5px;
+    border-left: 3px solid #909090;
+    transition: all .5s cubic-bezier(.19,1,.22,1);
+    transform: translate3d(0,-120%,0);
+    z-index:0;
+}
+@media (max-width: 800px) {
+    .floating-header-toc div.box:hover {
+    border: 3px solid rgba(0,0,0,0);
+	}
+    .floating-header-title{
+    	display:none;
+    }
+    .floating-header-divider{
+    	display:none;
+    }
+    .floating-header-toc{
+    	max-width:280px;
+    }
+    .floating-header-toc span.title{
+    	display:none;
+    }
+    .floating-header-logo {
+        flex:1;
+    }
+}
+.toc.active {
+    visibility: visible;
+    transition: all .5s cubic-bezier(.22,1,.27,1);
+    transform: translateZ(40px);
+}
+.toc li {
+    display:block;
+    list-style-type:none;
+}
+.toc li span{
+    color:#000;
+    cursor:pointer;
+}
+.toc li.active span{
+    color:#aaa;
+}
+.toc li.toc-level-H3{
+    padding-left: 40px;
+}
+.toc li.toc-level-H2{
+    padding-left: 20px;
+}
