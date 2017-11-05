@@ -158,7 +158,9 @@ $(document).ready(function () {
 
         }
         var unpause = function () {
-            if (toc_pause&&!toc_open) {
+            if (toc_pause && !toc_open) {
+                console.log(toc_pause)
+                console.log(toc_open)
                 hold();
             }
             toc_pause = false;
