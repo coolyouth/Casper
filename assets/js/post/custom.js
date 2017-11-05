@@ -228,6 +228,11 @@ $(document).ready(function () {
         header_position.push(end.getBoundingClientRect().top)
 
         function setToc(){
+            if(lastnumber >= header_link.length){
+                lastnumber = header_link.length - 1;
+            }else if(lastnumber < 0 ){
+                lastnumber = 0;
+            }
             if(lastnumber === header_link.length - 1){
                 tocHelper.pause();
                 toc_title.innerText = "推荐阅读"
