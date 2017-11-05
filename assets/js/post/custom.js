@@ -112,7 +112,7 @@ $(document).ready(function () {
             }
         }
         var close = function () {
-            if (!toc_pause && !toc_hold) {
+            if (!toc_hold) {
                 toc_open = false
                 toc_hover = false
                 var clearHover = function () {
@@ -124,7 +124,7 @@ $(document).ready(function () {
             }
         }
         var open = function () {
-            if (!toc_pause && !toc_hold) {
+            if (!toc_hold) {
                 toc_open = true;
                 toc_hover = true;
                 active();
@@ -134,7 +134,6 @@ $(document).ready(function () {
             var clearHold = function () {
                 toc_hold = false
             }
-            if (!toc_pause) {
                 var toc = $('div.toc')
                 if (toc_hold) {
                     toc_open = false;
@@ -147,20 +146,21 @@ $(document).ready(function () {
                     active();
                     $('.floating-header-toc .box').addClass("hold")
                 }
-            }
 
         }
         var pause = function () {
-            toc_pause = true;
             if (toc_open) {
-                toc.removeClass("active")
+                if(toc_hold){
+                    toc_pause = true;
+                    hold();
+                }
             }
 
         }
         var unpause = function () {
-            toc_pause = false;
-            if (toc_open) {
-                toc.addClass("active")
+            if (toc_pause) {
+                toc_pause = false;
+                hold();
             }
         }
         return {
