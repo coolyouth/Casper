@@ -226,7 +226,6 @@ $(document).ready(function () {
             header_position.push(block.getBoundingClientRect().top + window.scrollY - 60);
         })
         header_position.push(end.getBoundingClientRect().top)
-
         function setToc(){
             if(lastnumber >= header_link.length){
                 lastnumber = header_link.length - 1;
@@ -288,11 +287,14 @@ $(document).ready(function () {
             if(startpoint(lastnumber)<lastScrollY && lastScrollY <= endpoint(lastnumber+1)){
                 setToc();
             }else if(startpoint(lastnumber+1)<lastScrollY && lastScrollY <= endpoint(lastnumber+2)){
+                toc_link[lastnumber].classList.remove('active');
                 lastnumber++;
                 setToc();
+                toc_link[lastnumber].classList.remove('active');
             }else if(startpoint(lastnumber-1)<lastScrollY && lastScrollY <= endpoint(lastnumber)){
+                toc_link[lastnumber].classList.remove('active');
                 lastnumber--;
-                setToc();
+                setToc();  
             }else{
                 console.log("not found")
                 for (var i = 0; i < header_link.length; i++) {
