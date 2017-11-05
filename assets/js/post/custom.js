@@ -154,12 +154,10 @@ $(document).ready(function () {
         }
         var unpause = function () {
             if (toc_pause && !toc_open && !toc_hold) {
-                console.log(toc_pause)
-                console.log(toc_open)
-                console.log(toc_hold)
                 toc_pause = false;
                 hold();
             }
+            toc_pause = false;
 
         }
         return {
