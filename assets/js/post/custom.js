@@ -279,10 +279,6 @@ $(document).ready(function () {
                 lastnumber++;
                 setToc();
             } else if (getStartpoint(lastnumber - 1) < lastScrollY && lastScrollY <= getEndpoint(lastnumber)) {
-                console.log(lastnumber)
-                console.log(lastScrollY)
-                console.log(getStartpoint(lastnumber - 1))
-                console.log(getEndpoint(lastnumber))
                 clearToc()
                 lastnumber--;
                 setToc();
