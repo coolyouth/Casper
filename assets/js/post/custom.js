@@ -75,20 +75,20 @@ $(document).ready(function () {
             }
             if (i === $('.toc li').length - 1) {
                 console.log(i)
-                console.log('H1'+hasH1);
-                console.log('H2'+hasH2);
+                console.log('H1' + hasH1);
+                console.log('H2' + hasH2);
                 change();
             }
         })
-
-
     }
 
     $('.post-full-content h1,.post-full-content h2,.post-full-content h3').each(function (i, block) {
         $(block).attr('id', block.innerText.replace(/[#<>.\s]/g, "_"));
         $(block).attr('class', "header-link");
         $('.toc').append('<li class="toc-link toc-level-' + block.tagName + '" ><span id=' + $(block).attr('id') + '> ' + block.innerText + '</span></li>')
-        clearTitle();
+        if (i === $('.post-full-content h1,.post-full-content h2,.post-full-content h3').length - 1) {
+            clearTitle();
+        }
     })
 
     var tocHelper = (function () {
@@ -295,3 +295,4 @@ $(document).ready(function () {
         $('.floating-header').addClass('floating-active');
     }
 });
+
