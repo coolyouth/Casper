@@ -149,11 +149,9 @@ $(document).ready(function () {
 
         }
         var pause = function () {
-            if (toc_open) {
-                if(toc_hold){
-                    toc_pause = true;
-                    hold();
-                }
+            if (!toc_pause&&toc_open&&toc_hold) {
+                toc_pause = true;
+                hold();
             }
 
         }
