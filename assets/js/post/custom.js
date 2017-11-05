@@ -270,13 +270,13 @@ $(document).ready(function () {
         }
 
         function Positioning() {
-            if (getEndpoint(lastnumber) < lastScrollY && lastScrollY <= getStartpoint(lastnumber + 1)) {
+            if (getStartpoint(lastnumber) < lastScrollY && lastScrollY <= getEndpoint(lastnumber + 1)) {
                 setToc();
-            } else if (getEndpoint(lastnumber + 1) < lastScrollY && lastScrollY <= getStartpoint(lastnumber + 2)) {
+            } else if (getStartpoint(lastnumber + 1) < lastScrollY && lastScrollY <= getEndpoint(lastnumber + 2)) {
                 clearToc()
                 lastnumber++;
                 setToc();
-            } else if (getEndpoint(lastnumber - 1) < lastScrollY && lastScrollY <= endpoint(lastnumber)) {
+            } else if (getStartpoint(lastnumber - 1) < lastScrollY && lastScrollY <= getEndpoint(lastnumber)) {
                 clearToc()
                 lastnumber--;
                 setToc();
