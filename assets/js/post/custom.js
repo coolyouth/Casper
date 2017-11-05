@@ -74,9 +74,6 @@ $(document).ready(function () {
                 hasH2 = true;
             }
             if (i === $('.toc li').length - 1) {
-                console.log(i)
-                console.log('H1' + hasH1);
-                console.log('H2' + hasH2);
                 change();
             }
         })
@@ -134,34 +131,36 @@ $(document).ready(function () {
             var clearHold = function () {
                 toc_hold = false
             }
-                var toc = $('div.toc')
-                if (toc_hold) {
-                    toc_open = false;
-                    $('.floating-header-toc .box').removeClass("hold")
-                    setTimeout(clearHold, 400)
-                    disactive();
-                } else {
-                    toc_hold = true;
-                    toc_open = true;
-                    active();
-                    $('.floating-header-toc .box').addClass("hold")
-                }
+            var toc = $('div.toc')
+            if (toc_hold) {
+                toc_open = false;
+                $('.floating-header-toc .box').removeClass("hold")
+                setTimeout(clearHold, 400)
+                disactive();
+            } else {
+                toc_hold = true;
+                toc_open = true;
+                active();
+                $('.floating-header-toc .box').addClass("hold")
+            }
 
         }
         var pause = function () {
-            if (!toc_pause&&toc_open&&toc_hold) {
+            if (!toc_pause && toc_open && toc_hold) {
                 toc_pause = true;
                 hold();
             }
 
         }
         var unpause = function () {
-            if (toc_pause && !toc_open) {
+            if (toc_pause && !toc_open && !toc_hold) {
                 console.log(toc_pause)
                 console.log(toc_open)
+                console.log(toc_hold)
+                toc_pause = false;
                 hold();
             }
-            toc_pause = false;
+
         }
         return {
             close: close,
