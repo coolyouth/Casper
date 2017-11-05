@@ -156,7 +156,7 @@ $(document).ready(function () {
             if (toc_pause && !toc_open && !toc_hold) {
                 toc_pause = false;
                 hold();
-            }else if(toc_pause){
+            } else if (toc_pause) {
 
             }
 
@@ -202,14 +202,19 @@ $(document).ready(function () {
 
 
     //End toc
-    if (!isMobile) {
-        var progressBar = document.querySelector('progress');
-        var header = document.querySelector('.floating-header');
-        var title = document.querySelector('.post-full-title');
-        var lastScrollY = window.scrollY;
-        var lastWindowHeight = window.innerHeight;
-        var lastDocumentHeight = $(document).height();
-        var ticking = false;
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    var titleHelper = (function () {
+
+
+        //init
         var toc_link = document.querySelectorAll('.toc-link');
         var header_link_node = document.querySelectorAll('.header-link');
         var toc_title = document.querySelector('.floating-header-toc #title');
@@ -226,82 +231,56 @@ $(document).ready(function () {
             header_position.push(block.getBoundingClientRect().top + window.scrollY - 60);
         })
         header_position.push(end.getBoundingClientRect().top)
-        function clearToc(){
-            if(lastnumber ===header_link.length - 1){
-                toc_link[lastnumber -1].classList.remove('active');
-            }else{
+
+        //Helper
+        function getEndpoint(number) {
+            return (number >= header_link.length) ? Infinity : header_position[number]
+        }
+
+        function getStartpoint(number) {
+            return (number <= -1) ? 0 : header_position[number]
+        }
+
+        //Function
+        function clearToc() {
+            if (lastnumber === header_link.length - 1) {
+                toc_link[lastnumber - 1].classList.remove('active');
+            } else {
                 toc_link[lastnumber].classList.remove('active');
             }
         }
-        function setToc(){
-            if(lastnumber >= header_link.length){
+
+        function setToc() {
+            if (lastnumber >= header_link.length) {
                 lastnumber = header_link.length - 1;
-            }else if(lastnumber < 0 ){
+            } else if (lastnumber < 0) {
                 lastnumber = 0;
             }
-            if(lastnumber === header_link.length - 1){
+            if (lastnumber === header_link.length - 1) {
                 tocHelper.pause();
                 toc_title.innerText = "推荐阅读"
-            }else if(lastnumber === header_link.length -2){
+            } else if (lastnumber === header_link.length - 2) {
                 toc_link[lastnumber].classList.add('active');
                 toc_title.innerText = header_link[lastnumber].innerText
-                tocHelper.unpause();
-            }else{
-                toc_link[lastnumber].classList.add('active');
-                toc_title.innerText = header_link[lastnumber].innerText
-            }
-        }
-
-        function onScroll() {
-            lastScrollY = window.scrollY;
-            requestTick();
-        }
-
-        function onResize() {
-            lastWindowHeight = window.innerHeight;
-            lastDocumentHeight = $(document).height();
-            if ($(document).width() <= 800) {
-                $('.site-header').css('display', 'block');
-            }
-            requestTick();
-        }
-
-        function requestTick() {
-            if (!ticking) {
-                requestAnimationFrame(update);
-                ticking = true;
-            }
-        }
-
-        function update() {
-            var trigger = title.getBoundingClientRect().top + window.scrollY;
-            var triggerOffset = title.offsetHeight + 35;
-            var progressMax = lastDocumentHeight - lastWindowHeight;
-            // show/hide floating header
-            if (lastScrollY >= trigger + triggerOffset) {
-                header.classList.add('floating-active');
                 tocHelper.unpause();
             } else {
-                header.classList.remove('floating-active');
-                tocHelper.pause();
+                toc_link[lastnumber].classList.add('active');
+                toc_title.innerText = header_link[lastnumber].innerText
             }
-            var endpoint = function(number){
-                return (number >= header_link.length) ? Infinity : header_position[number]
-            }
-            var startpoint = function(number){
-                return (number <= -1 ) ? 0 : header_position[number]
-            }
-            if(startpoint(lastnumber)<lastScrollY && lastScrollY <= endpoint(lastnumber+1)){
+        }
+
+        function Positioning() {
+            if (getEndpoint(lastnumber) < lastScrollY && lastScrollY <= getStartpoint(lastnumber + 1)) {
                 setToc();
-            }else if(startpoint(lastnumber+1)<lastScrollY && lastScrollY <= endpoint(lastnumber+2)){
+            } else if (getEndpoint(lastnumber + 1) < lastScrollY && lastScrollY <= getStartpoint(lastnumber + 2)) {
                 clearToc()
                 lastnumber++;
                 setToc();
-            }else if(startpoint(lastnumber-1)<lastScrollY && lastScrollY <= endpoint(lastnumber)){
+            } else if (getEndpoint(lastnumber - 1) < lastScrollY && lastScrollY <= endpoint(lastnumber)) {
                 clearToc()
                 lastnumber--;
-                setToc();  
-            }else{
+                setToc();
+            } else {
                 console.log("not found")
                 for (var i = 0; i < header_link.length; i++) {
                     var f = i + 1 === header_link.length,
@@ -324,14 +303,57 @@ $(document).ready(function () {
                     }
                 }
             }
-
-            
-            progressBar.setAttribute('max', progressMax);
-            progressBar.setAttribute('value', lastScrollY);
-            ticking = false;
         }
 
+        return {
+            Positioning: Positioning
+        }
+    })();
 
+
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        if ($(document).width() <= 800) {
+            $('.site-header').css('display', 'block');
+        }
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+            ticking = true;
+        }
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+            tocHelper.unpause();
+        } else {
+            header.classList.remove('floating-active');
+            tocHelper.pause();
+        }
+
+        titleHelper.Positioning()
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+        ticking = false;
+    }
+
+    if (!isMobile) {
         window.addEventListener('scroll', onScroll, {
             passive: true
         });
