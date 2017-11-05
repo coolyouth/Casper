@@ -81,11 +81,6 @@
     z-index:0;
 }
 @media (max-width: 800px) {
-    .site-header{
-        display:none;
-    }
-} 
-@media (max-width: 800px) {
     .floating-header-toc div.box:hover {
     border: 3px solid rgba(0,0,0,0);
 	}

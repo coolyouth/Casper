@@ -165,6 +165,7 @@ $(document).ready(function () {
         $('.floating-header-toc .box span#title').text("目录");
         $('.floating-header-toc').css('max-width','none');
         $('.floating-header-toc').css('min-width','none');
+        $('.site-header').css('display','none');
     }
     $('.toc').click(function (event) {
         var $obj = $(event.target);
