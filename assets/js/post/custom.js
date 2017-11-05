@@ -274,13 +274,18 @@ $(document).ready(function () {
                 header.classList.remove('floating-active');
                 tocHelper.pause();
             }
-
-            if(header_position[lastnumber]<lastScrollY && lastScrollY <= header_position[lastnumber+1]){
+            var endpoint = function(number){
+                return (number >= header_link.length) ? Infinity : header_position[number]
+            }
+            var startpoint = function(number){
+                return (number <= -1 ) ? 0 : header_position[number]
+            }
+            if(startpoint(lastnumber)<lastScrollY && lastScrollY <= endpoint(lastnumber+1)){
                 setToc();
-            }else if(header_position[lastnumber+1]<lastScrollY && lastScrollY <= header_position[lastnumber+2]){
+            }else if(startpoint(lastnumber+1)<lastScrollY && lastScrollY <= endpoint(lastnumber+2)){
                 lastnumber++;
                 setToc();
-            }else if(header_position[lastnumber-1]<lastScrollY && lastScrollY <= header_position[lastnumber]){
+            }else if(startpoint(lastnumber-1)<lastScrollY && lastScrollY <= endpoint(lastnumber)){
                 lastnumber--;
                 setToc();
             }else{
