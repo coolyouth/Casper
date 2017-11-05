@@ -227,6 +227,20 @@ $(document).ready(function () {
         })
         header_position.push(end.getBoundingClientRect().top)
 
+        function setToc(){
+            if(lastnumber === header_link.length - 1){
+                tocHelper.pause();
+                toc_title.innerText = "推荐阅读"
+            }else if(lastnumber === header_link.length -2){
+                toc_link[i].classList.add('active');
+                toc_title.innerText = header_link[i].innerText
+                tocHelper.unpause();
+            }else{
+                toc_link[i].classList.add('active');
+                toc_title.innerText = header_link[i].innerText
+            }
+        }
+
         function onScroll() {
             lastScrollY = window.scrollY;
             requestTick();
@@ -260,38 +274,40 @@ $(document).ready(function () {
                 header.classList.remove('floating-active');
                 tocHelper.pause();
             }
+
             if(header_position[lastnumber]<lastScrollY && lastScrollY <= header_position[lastnumber+1]){
-                if(lastnumber === header_link.length){
-                    tocHelper.pause();
-                    toc_title.innerText = "推荐阅读"
-                }else if(lastnumber === header_link.length -1){
-                    toc_link[i].classList.add('active');
-                    toc_title.innerText = header_link[i].innerText
-                    tocHelper.unpause();
-                }else{
-                    toc_link[i].classList.add('active');
-                    toc_title.innerText = header_link[i].innerText
-                }
-            }
-            for (var i = 0; i < header_link.length; i++) {
-                var f = i + 1 === header_link.length,
-                    l = header_position[i],
-                    c = f ? Infinity : header_position[i + 1]
-                if (l < lastScrollY && lastScrollY <= c) {
-                    if (i < header_link.length - 1) {
-                        toc_link[i].classList.add('active');
-                        toc_title.innerText = header_link[i].innerText
-                        tocHelper.unpause();
+                setToc();
+            }else if(header_position[lastnumber+1]<lastScrollY && lastScrollY <= header_position[lastnumber+2]){
+                lastnumber++;
+                setToc();
+            }else if(header_position[lastnumber-1]<lastScrollY && lastScrollY <= header_position[lastnumber]){
+                lastnumber--;
+                setToc();
+            }else{
+                console.log("not found")
+                for (var i = 0; i < header_link.length; i++) {
+                    var f = i + 1 === header_link.length,
+                        l = header_position[i],
+                        c = f ? Infinity : header_position[i + 1]
+                    if (l < lastScrollY && lastScrollY <= c) {
+                        lastnumber = i;
+                        if (i < header_link.length - 1) {
+                            toc_link[i].classList.add('active');
+                            toc_title.innerText = header_link[i].innerText
+                            tocHelper.unpause();
+                        } else {
+                            tocHelper.pause();
+                            toc_title.innerText = "推荐阅读"
+                        }
                     } else {
-                        tocHelper.pause();
-                        toc_title.innerText = "推荐阅读"
-                    }
-                } else {
-                    if (i < header_link.length - 1) {
-                        toc_link[i].classList.remove('active');
+                        if (i < header_link.length - 1) {
+                            toc_link[i].classList.remove('active');
+                        }
                     }
                 }
             }
+
+            
             progressBar.setAttribute('max', progressMax);
             progressBar.setAttribute('value', lastScrollY);
             ticking = false;
