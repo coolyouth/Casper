@@ -199,8 +199,8 @@ $(document).ready(function () {
         function onResize() {
             lastWindowHeight = window.innerHeight;
             lastDocumentHeight = $(document).height();
-            if($(document).width() <= 800){
-                $('.site-header').css('display','block');
+            if ($(document).width() <= 800) {
+                $('.site-header').css('display', 'block');
             }
             requestTick();
         }
@@ -245,15 +245,15 @@ $(document).ready(function () {
             }
             progressBar.setAttribute('max', progressMax);
             progressBar.setAttribute('value', lastScrollY);
+            ticking = false;
         }
-        ticking = false;
 
 
         window.addEventListener('scroll', onScroll, { passive: true });
         window.addEventListener('resize', onResize, false);
 
         update();
-    }else{
+    } else {
         $('.floating-header').addClass('floating-active');
     }
 });
