@@ -24,7 +24,7 @@ $(document).ready(function () {
         $(block.parentNode).attr('class', $(block).attr('class'));
         if (!isMobile) {
             hljs.highlightBlock(block);
-        }else{
+        } else {
             $(block).addClass('hljs')
         }
     });
@@ -50,7 +50,7 @@ $(document).ready(function () {
     var clearTitle = function () {
         var hasH1 = false;
         var hasH2 = false;
-        var change = function(){
+        var change = function () {
             $('.toc li').each(function (i, block) {
                 if (!hasH1 && !hasH2) {
                     $(block).attr('class', "toc-link toc-level-H1");
@@ -73,9 +73,12 @@ $(document).ready(function () {
             } else if ($(block).hasClass('toc-level-H2')) {
                 hasH2 = true;
             }
+            if (i === $('.toc li').length - 1) {
+                change();
+            }
         })
-        change();
-        
+
+
     }
 
     $('.post-full-content h1,.post-full-content h2,.post-full-content h3').each(function (i, block) {
@@ -157,26 +160,44 @@ $(document).ready(function () {
                 toc.addClass("active")
             }
         }
-        return { close: close, open: open, hold: hold, pause: pause, unpause: unpause }
+        return {
+            close: close,
+            open: open,
+            hold: hold,
+            pause: pause,
+            unpause: unpause
+        }
     })();
     if (!isMobile) {
-        $('.floating-header-toc .box').mouseover(function (e) { tocHelper.open() })
-        $('.floating-header-toc .box').mouseout(function (e) { tocHelper.close() })
-        $('.toc').mouseover(function () { tocHelper.open() })
-        $('.toc').mouseout(function () { tocHelper.close() })
-    }else{
-        $('.floating-header-toc .box').css('background','none');
+        $('.floating-header-toc .box').mouseover(function (e) {
+            tocHelper.open()
+        })
+        $('.floating-header-toc .box').mouseout(function (e) {
+            tocHelper.close()
+        })
+        $('.toc').mouseover(function () {
+            tocHelper.open()
+        })
+        $('.toc').mouseout(function () {
+            tocHelper.close()
+        })
+    } else {
+        $('.floating-header-toc .box').css('background', 'none');
         $('.floating-header-toc .box span#title').text("目录");
-        $('.floating-header-toc').css('max-width','none');
-        $('.floating-header-toc').css('min-width','none');
-        $('.site-header').css('display','none');
+        $('.floating-header-toc').css('max-width', 'none');
+        $('.floating-header-toc').css('min-width', 'none');
+        $('.site-header').css('display', 'none');
     }
     $('.toc').click(function (event) {
         var $obj = $(event.target);
         var id = $obj.attr('id');
-        if (id) { window.scrollTo(0, $("#" + id).offset().top - 40) }
+        if (id) {
+            window.scrollTo(0, $("#" + id).offset().top - 40)
+        }
     })
-    $('.floating-header-toc .box').click(function () { tocHelper.hold() })
+    $('.floating-header-toc .box').click(function () {
+        tocHelper.hold()
+    })
 
 
     //End toc
@@ -261,7 +282,9 @@ $(document).ready(function () {
         }
 
 
-        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('scroll', onScroll, {
+            passive: true
+        });
         window.addEventListener('resize', onResize, false);
 
         update();
