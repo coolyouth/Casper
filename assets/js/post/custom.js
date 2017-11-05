@@ -228,9 +228,9 @@ $(document).ready(function () {
 
         var header_position = [];
         header_link.forEach(function (block, i) {
-            header_position.push(block.getBoundingClientRect().top + window.scrollY - 60);
+            header_position.push($(block).offset().top + window.scrollY - 60);
         })
-        header_position.push(end.getBoundingClientRect().top)
+        header_position.push($(end).offset().top)
         console.log(header_position)
 
         //Helper
