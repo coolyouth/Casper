@@ -74,6 +74,9 @@ $(document).ready(function () {
                 hasH2 = true;
             }
             if (i === $('.toc li').length - 1) {
+                console.log(i)
+                console.log('H1'+hasH1);
+                console.log('H2'+hasH2);
                 change();
             }
         })
