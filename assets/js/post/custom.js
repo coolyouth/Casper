@@ -253,5 +253,7 @@ $(document).ready(function () {
         window.addEventListener('resize', onResize, false);
 
         update();
+    }else{
+        $('.floating-header').addClass('floating-active');
     }
 });

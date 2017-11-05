@@ -84,9 +84,6 @@
     .site-header{
         display:none;
     }
-    .floating-header {
-        visibility: visible;
-    }
 } 
 @media (max-width: 800px) {
     .floating-header-toc div.box:hover {
