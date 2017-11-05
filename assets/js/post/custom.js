@@ -41,11 +41,39 @@ $(document).ready(function () {
 
 
     //Start Prepare toc
+    var clearTitle = function(){
+        var hasH1 = false;
+        var hasH2 = false;
+        $('.toc li').each(function(i,block){
+            if($(block).hasClass('toc-level-H1')){
+                hasH1 = true;
+            }else if($(block).hasClass('toc-level-H2')){
+                hasH2 = true;
+            }
+        })
+        $('.toc li').each(function(i,block){
+            if(!hasH1&&!hasH2){
+                $(block).attr('class', "toc-link toc-level-H1");
+            }else if(!hasH1&&hasH2){
+                if($(block).hasClass('toc-level-H2')){
+                    $(block).attr('class', "toc-link toc-level-H1");
+                }else{
+                    $(block).attr('class', "toc-link toc-level-H2");
+                }
+            }else if(hasH1&&!hasH2){
+                if($(block).hasClass('toc-level-H3')){
+                    $(block).attr('class', "toc-link toc-level-H2");
+                }
+            }
+        })
+    }
     $('.post-full-content h1,.post-full-content h2,.post-full-content h3').each(function (i, block) {
         $(block).attr('id', block.innerText.replace(/[#<>.\s]/g, "_"));
         $(block).attr('class', "header-link");
         $('.toc').append('<li class="toc-link toc-level-' + block.tagName + '" ><span id=' + $(block).attr('id') + '> ' + block.innerText + '</span></li>')
+        clearTitle();
     })
+
     var tocHelper = (function () {
         var toc_open = false;
         var toc_hold = false;
@@ -132,7 +160,6 @@ $(document).ready(function () {
     $('.floating-header-toc .box').click(function () { tocHelper.hold() })
 
     //End toc
-
     var progressBar = document.querySelector('progress');
     var header = document.querySelector('.floating-header');
     var title = document.querySelector('.post-full-title');
@@ -169,8 +196,8 @@ $(document).ready(function () {
     function requestTick() {
         if (!ticking) {
             requestAnimationFrame(update);
+            ticking = true;
         }
-        ticking = true;
     }
 
     function update() {
