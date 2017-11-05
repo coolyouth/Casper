@@ -232,12 +232,12 @@ $(document).ready(function () {
                 tocHelper.pause();
                 toc_title.innerText = "推荐阅读"
             }else if(lastnumber === header_link.length -2){
-                toc_link[i].classList.add('active');
-                toc_title.innerText = header_link[i].innerText
+                toc_link[lastnumber].classList.add('active');
+                toc_title.innerText = header_link[lastnumber].innerText
                 tocHelper.unpause();
             }else{
-                toc_link[i].classList.add('active');
-                toc_title.innerText = header_link[i].innerText
+                toc_link[lastnumber].classList.add('active');
+                toc_title.innerText = header_link[lastnumber].innerText
             }
         }
 
