@@ -24,6 +24,8 @@ $(document).ready(function () {
         $(block.parentNode).attr('class', $(block).attr('class'));
         if (!isMobile) {
             hljs.highlightBlock(block);
+        }else{
+            $(block).addClass('hljs')
         }
     });
     //End code block
@@ -71,89 +73,89 @@ $(document).ready(function () {
             }
         })
     }
-    if (!isMobile) {
-        $('.post-full-content h1,.post-full-content h2,.post-full-content h3').each(function (i, block) {
-            $(block).attr('id', block.innerText.replace(/[#<>.\s]/g, "_"));
-            $(block).attr('class', "header-link");
-            $('.toc').append('<li class="toc-link toc-level-' + block.tagName + '" ><span id=' + $(block).attr('id') + '> ' + block.innerText + '</span></li>')
-            clearTitle();
-        })
 
-        var tocHelper = (function () {
-            var toc_open = false;
-            var toc_hold = false;
-            var toc_pause = false;
-            var toc_hover = false;
-            var toc = $('.toc')
-            var disactive = function () {
-                if ($('div.toc').hasClass("active")) {
-                    $('div.toc').removeClass("active")
-                    $('.floating-header-toc span#open').addClass('active');
-                    $('.floating-header-toc span#close').removeClass('active');
-                }
+    $('.post-full-content h1,.post-full-content h2,.post-full-content h3').each(function (i, block) {
+        $(block).attr('id', block.innerText.replace(/[#<>.\s]/g, "_"));
+        $(block).attr('class', "header-link");
+        $('.toc').append('<li class="toc-link toc-level-' + block.tagName + '" ><span id=' + $(block).attr('id') + '> ' + block.innerText + '</span></li>')
+        clearTitle();
+    })
+
+    var tocHelper = (function () {
+        var toc_open = false;
+        var toc_hold = false;
+        var toc_pause = false;
+        var toc_hover = false;
+        var toc = $('.toc')
+        var disactive = function () {
+            if ($('div.toc').hasClass("active")) {
+                $('div.toc').removeClass("active")
+                $('.floating-header-toc span#open').addClass('active');
+                $('.floating-header-toc span#close').removeClass('active');
             }
-            var active = function () {
-                if (!$('div.toc').hasClass("active")) {
-                    $('div.toc').addClass("active")
-                    $('.floating-header-toc span#open').removeClass('active');
-                    $('.floating-header-toc span#close').addClass('active');
-                }
+        }
+        var active = function () {
+            if (!$('div.toc').hasClass("active")) {
+                $('div.toc').addClass("active")
+                $('.floating-header-toc span#open').removeClass('active');
+                $('.floating-header-toc span#close').addClass('active');
             }
-            var close = function () {
-                if (!toc_pause && !toc_hold) {
-                    toc_open = false
-                    toc_hover = false
-                    var clearHover = function () {
-                        if (toc_hover === false) {
-                            disactive();
-                        }
-                    }
-                    toc_timer = setTimeout(clearHover, 100)
-                }
-            }
-            var open = function () {
-                if (!toc_pause && !toc_hold) {
-                    toc_open = true;
-                    toc_hover = true;
-                    active();
-                }
-            }
-            var hold = function () {
-                var clearHold = function () {
-                    toc_hold = false
-                }
-                if (!toc_pause) {
-                    var toc = $('div.toc')
-                    if (toc_hold) {
-                        toc_open = false;
-                        $('.floating-header-toc .box').removeClass("hold")
-                        setTimeout(clearHold, 400)
+        }
+        var close = function () {
+            if (!toc_pause && !toc_hold) {
+                toc_open = false
+                toc_hover = false
+                var clearHover = function () {
+                    if (toc_hover === false) {
                         disactive();
-                    } else {
-                        toc_hold = true;
-                        toc_open = true;
-                        active();
-                        $('.floating-header-toc .box').addClass("hold")
                     }
                 }
-
+                toc_timer = setTimeout(clearHover, 100)
             }
-            var pause = function () {
-                toc_pause = true;
-                if (toc_open) {
-                    toc.removeClass("active")
+        }
+        var open = function () {
+            if (!toc_pause && !toc_hold) {
+                toc_open = true;
+                toc_hover = true;
+                active();
+            }
+        }
+        var hold = function () {
+            var clearHold = function () {
+                toc_hold = false
+            }
+            if (!toc_pause) {
+                var toc = $('div.toc')
+                if (toc_hold) {
+                    toc_open = false;
+                    $('.floating-header-toc .box').removeClass("hold")
+                    setTimeout(clearHold, 400)
+                    disactive();
+                } else {
+                    toc_hold = true;
+                    toc_open = true;
+                    active();
+                    $('.floating-header-toc .box').addClass("hold")
                 }
-
             }
-            var unpause = function () {
-                toc_pause = false;
-                if (toc_open) {
-                    toc.addClass("active")
-                }
-            }
-            return { close: close, open: open, hold: hold, pause: pause, unpause: unpause }
-        })();
 
+        }
+        var pause = function () {
+            toc_pause = true;
+            if (toc_open) {
+                toc.removeClass("active")
+            }
+
+        }
+        var unpause = function () {
+            toc_pause = false;
+            if (toc_open) {
+                toc.addClass("active")
+            }
+        }
+        return { close: close, open: open, hold: hold, pause: pause, unpause: unpause }
+    })();
+    if (!isMobile) {
         $('.floating-header-toc .box').mouseover(function (e) { tocHelper.open() })
         $('.floating-header-toc .box').mouseout(function (e) { tocHelper.close() })
         $('.toc').mouseover(function () { tocHelper.open() })
