@@ -16,11 +16,11 @@ $(document).ready(function () {
             $numbering.append($('<li/>').text(i));
         }
         //hightlight.js
-        if ($(block).attr('class')) {
-            $(block).attr('class', $(block).attr('class').replace("language-", ""));
-        }
+        //if ($(block).attr('class')) {
+        //    $(block).attr('class', $(block).attr('class').replace("language-", ""));
+        //}
         $(block.parentNode).attr('class', $(block).attr('class'));
-        hljs.highlightBlock(block);
+        //hljs.highlightBlock(block);
     });
     //End code block
 
