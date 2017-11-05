@@ -215,6 +215,7 @@ $(document).ready(function () {
 
 
         //init
+        var lastScrollY = window.scrollY;
         var toc_link = document.querySelectorAll('.toc-link');
         var header_link_node = document.querySelectorAll('.header-link');
         var toc_title = document.querySelector('.floating-header-toc #title');
