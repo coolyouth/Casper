@@ -290,7 +290,6 @@ $(document).ready(function () {
                 toc_link[lastnumber].classList.remove('active');
                 lastnumber++;
                 setToc();
-                toc_link[lastnumber].classList.remove('active');
             }else if(startpoint(lastnumber-1)<lastScrollY && lastScrollY <= endpoint(lastnumber)){
                 toc_link[lastnumber].classList.remove('active');
                 lastnumber--;
