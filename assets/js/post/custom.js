@@ -230,7 +230,7 @@ $(document).ready(function () {
             if(lastnumber ===header_link.length - 1){
                 toc_link[lastnumber -1].classList.remove('active');
             }else{
-                toc_link[lastnumber].classList.remove('active');s
+                toc_link[lastnumber].classList.remove('active');
             }
         }
         function setToc(){
