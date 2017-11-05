@@ -158,10 +158,10 @@ $(document).ready(function () {
 
         }
         var unpause = function () {
-            if (toc_pause) {
-                toc_pause = false;
+            if (toc_pause&&!toc_open) {
                 hold();
             }
+            toc_pause = false;
         }
         return {
             close: close,
