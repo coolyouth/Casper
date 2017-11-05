@@ -156,8 +156,9 @@ $(document).ready(function () {
             if (toc_pause && !toc_open && !toc_hold) {
                 toc_pause = false;
                 hold();
+            }else if(toc_pause){
+
             }
-            toc_pause = false;
 
         }
         return {
@@ -213,11 +214,13 @@ $(document).ready(function () {
         var header_link_node = document.querySelectorAll('.header-link');
         var toc_title = document.querySelector('.floating-header-toc #title');
         var end = document.querySelector('.post-full-footer');
+        var lastnumber = 0;
         var header_link = [];
         header_link_node.forEach(function (block, i) {
             header_link.push(block);
         })
         header_link.push(end)
+
         var header_position = [];
         header_link.forEach(function (block, i) {
             header_position.push(block.getBoundingClientRect().top + window.scrollY - 60);
@@ -256,6 +259,19 @@ $(document).ready(function () {
             } else {
                 header.classList.remove('floating-active');
                 tocHelper.pause();
+            }
+            if(header_position[lastnumber]<lastScrollY && lastScrollY <= header_position[lastnumber+1]){
+                if(lastnumber === header_link.length){
+                    tocHelper.pause();
+                    toc_title.innerText = "推荐阅读"
+                }else if(lastnumber === header_link.length -1){
+                    toc_link[i].classList.add('active');
+                    toc_title.innerText = header_link[i].innerText
+                    tocHelper.unpause();
+                }else{
+                    toc_link[i].classList.add('active');
+                    toc_title.innerText = header_link[i].innerText
+                }
             }
             for (var i = 0; i < header_link.length; i++) {
                 var f = i + 1 === header_link.length,
