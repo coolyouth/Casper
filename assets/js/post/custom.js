@@ -156,8 +156,8 @@ $(document).ready(function () {
             if (toc_pause && !toc_open && !toc_hold) {
                 toc_pause = false;
                 hold();
-            } else if (toc_pause) {
-
+            } else if (toc_pause && toc_open && toc_hold) {
+                toc_pause = false;
             }
 
         }
