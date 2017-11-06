@@ -230,7 +230,6 @@ $(document).ready(function () {
         header_link.forEach(function (block, i) {
             header_position.push(block.getBoundingClientRect().top + window.scrollY - 60);
         })
-        header_position.push(end.getBoundingClientRect().top + window.scrollY - 60)
         console.log(header_position)
 
         //Helper
